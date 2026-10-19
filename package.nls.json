@@ -1,0 +1,12 @@
+{
+  "command.category.dst-lan": "dst-lan",
+  "command.gen-mod": "🔗Gen ModFrame",
+  "command.toggle-language": "👬Toggle Language",
+  "command.delete-comments": "💦Delete Comments",
+  "command.compiler": "📦Compiler Anim",
+  "command.makeimg": "📐Make Prefab Anim and Img",
+  "command.inject-avatar": "👦Inject Avatar Template",
+  "command.extrafn": "🌌Extra",
+  
+  "icontheme.off": "❌Disable Icon Theme"
+}

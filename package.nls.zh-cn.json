@@ -1,0 +1,12 @@
+{
+  "command.category.dst-lan": "dst-lan",
+  "command.gen-mod": "🔗生成mod框架",
+  "command.toggle-language": "👬切换语言",
+  "command.delete-comments": "💦去注释和空行",
+  "command.compiler": "📦打包当前mod中的动画",
+  "command.makeimg": "📐制作预制物动画和图片",
+  "command.inject-avatar": "👦注入人物模板",
+  "command.extrafn": "🌌Extra功能",
+
+  "icontheme.off": "❌禁用图标主题"
+}

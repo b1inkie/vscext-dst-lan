@@ -1,0 +1,128 @@
+{
+    "name": "dst-lan",
+    "displayName": "dst-lan",
+    "description": "",
+    "publisher": "lan",
+    "version": "2.0.0",
+    "repository": {},
+    "engines": {
+        "vscode": "^1.75.0"
+    },
+    "icon": "icon.png",
+    "categories": [
+        "Other",
+        "Snippets",
+        "Programming Languages",
+        "Themes"
+    ],
+    "l10n": "./l10n",
+    "activationEvents": [],
+    "main": "./out/extension.js",
+    "contributes": {
+        "iconThemes": [
+            {
+                "id": "dst-icons",
+                "label": "DST LAN ICONS",
+                "path": "./iconthemes/dst-classic.json"
+            },
+            {
+                "id": "no-icontheme(default)",
+                "label": "%icontheme.off%",
+                "path": "./iconthemes/default.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "dst-lan.gen-mod",
+                "category": "%command.category.dst-lan%",
+                "title": "%command.gen-mod%"
+            },
+            {
+                "command": "dst-lan.toggle-language",
+                "category": "%command.category.dst-lan%",
+                "title": "%command.toggle-language%"
+            },
+            {
+                "command": "dst-lan.delete-comments",
+                "category": "%command.category.dst-lan%",
+                "title": "%command.delete-comments%"
+            },
+            {
+                "command": "dst-lan.compiler",
+                "category": "%command.category.dst-lan%",
+                "title": "%command.compiler%"
+            },
+            {
+                "command": "dst-lan.makeimg",
+                "category": "%command.category.dst-lan%",
+                "title": "%command.makeimg%"
+            },
+            {
+                "command": "dst-lan.inject-avatar",
+                "category": "%command.category.dst-lan%",
+                "title": "%command.inject-avatar%"
+            },
+            {
+                "command": "dst-lan.extrafn",
+                "category": "%command.category.dst-lan%",
+                "title": "%command.extrafn%"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "lua",
+                "path": "./snippets/snippets.code-snippets"
+            },
+            {
+                "language": "lua",
+                "path": "./snippets/quick_gen_files.code-snippets"
+            }
+        ],
+        "languages": [
+            {
+                "id": "lua",
+                "extensions": [
+                    ".lua"
+                ],
+                "aliases": [
+                    "dst-lua"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "lua",
+                "scopeName": "source.lua",
+                "path": "./syntaxes/lua-dst-comment.tmLanguage.json"
+            }
+        ]
+    },
+    "scripts": {
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "lint": "eslint src",
+        "smoke": "node tools/smoke/run-all.js",
+        "test": "vscode-test",
+        "vscode:prepublish": "npm run compile",
+        "pretest": "npm run compile && npm run lint"
+    },
+    "devDependencies": {
+        "@types/archiver": "^6.0.3",
+        "@types/mocha": "^10.0.10",
+        "@types/node": "20.x",
+        "@types/vscode": "^1.75.0",
+        "@types/xml2js": "^0.4.14",
+        "@typescript-eslint/eslint-plugin": "^8.17.0",
+        "@typescript-eslint/parser": "^8.17.0",
+        "@vscode/test-cli": "^0.0.10",
+        "@vscode/test-electron": "^2.4.1",
+        "eslint": "^9.16.0",
+        "typescript": "^5.7.2"
+    },
+    "dependencies": {
+        "archiver": "^7.0.1",
+        "sharp": "^0.33.5",
+        "xml2js": "^0.6.2"
+    }
+}

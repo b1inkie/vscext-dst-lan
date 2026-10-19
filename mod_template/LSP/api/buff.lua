@@ -1,0 +1,14 @@
+---@meta
+
+---@class data_buff # 官方buff
+---@field id string # 唯一id
+---@field onattachedfn fun(inst:ent,target:ent,id:string) # 获取buff <br> target是获取buff的对象
+---@field onextendedfn nil|fun(inst:ent,target:ent,id:string) # target是获取buff的对象
+---@field ondetachedfn fun(inst:ent,target:ent,id:string) # buff结束 <br> target是获取buff的对象
+---@field duration nil|number # buff持续时间 不写就 显示 --:--
+---@field priority nil|number # 优先级
+---@field prefabs nil|PrefabID[] # 前置prefab
+---@field attached_string nil|string # 获取buff的提示字符串
+---@field detached_string nil|string # 结束buff的提示字符串
+---@field buff_string string # buff的名字
+---@field paused boolean|nil # 一般不限时间的buff,可以设置这个为true,默认都有持续时间 <br> 用实体方法 `RemoveDebuff` 来移除buff

@@ -1,0 +1,12 @@
+.vscode/**
+.vscode-test/**
+src/**
+dst-lan.code-workspace
+.gitignore
+**/tsconfig.json
+**/eslint.config.mjs
+**/*.map
+**/*.ts
+**/.vscode-test.*
+out/test/**
+tools/**

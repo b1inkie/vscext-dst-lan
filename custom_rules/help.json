@@ -1,0 +1,14 @@
+{
+    "triggers": [
+        {
+            "regex": "help",
+            "items": [
+                {
+                    "label": "help",
+                    "documentation": "### API 补全 v\n- 为避免登github,我后面会将补全提示和更新信息放在这里!\n\n|触发|-|补全|\n|-|-|-|\n|p+预制物ID|-|预制物id补全,可以输中文译名查找|\n|tag+标签|-|tag补全,欢迎大家贡献注释,社区靠大家|\n|g+方法名|-|不常用全局方法查询(常用的可以直接敲出来,不常用的会被丢进g+里)|\n|com+组件名|-|不常用组件查询|\n|正常触发方法+i|-|启发模式:提供一些快捷代码块|\n|contri+components|-|成为贡献者!(注释模板)|\n|LAN+param|-|方法形参注释---$param: (param) <type> [desc] {others}|\n|LAN+return|-|方法返回注释---$return: <type> [desc]|\n|LANcomponent|-|插入空组件代码块|\n|LANstring|-|选中一个预制物名生成翻译代码块|\n|upper/lower|-|选中字符串转大/小写|\n### 主题\n- DST LAN ICON\n\n\t单独为DST MOD文件夹做了图标\n### 其他\n- 用户自定义注释\n\n\t-- @用户名: 注释\n### 命令(ctrl + shift + P)\n- 👬切换语言\n- 💦去注释和空行\n- 🔗生成mod框架\n- 📦打包当前mod中的动画\n- 🎨制作预制物动画和图片\n",
+                    "author": "lan"
+                }
+            ]
+        }
+    ]
+}

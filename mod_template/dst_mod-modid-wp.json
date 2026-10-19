@@ -1,0 +1,62 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.tabSize": 4,
+		"workbench.editor.showTabs": "none",
+		"explorer.openEditors.sortOrder": "alphabetical",
+		"workbench.colorTheme": "Monokai",
+		"Lua.runtime.version": "Lua 5.1",
+		"Lua.diagnostics.disable": [
+			"redundant-parameter",
+			"cast-local-type",
+			"redundant-return-value"
+		],
+		"editor.emptySelectionClipboard": false,
+		"editor.formatOnPaste": true,
+		"workbench.editor.customLabels.patterns": {
+			"**/**/*.lua": "${filename} @ ${dirname}"
+		},
+		"todo-tree.general.tags": [
+			"BUG",
+			"FIXME",
+			"TODO",
+			"*Prefab:",
+			"*Component:",
+			"*Art:",
+			"*Alias:"
+		],
+		"todo-tree.highlights.customHighlight": {
+			"*Prefab:": {
+				"icon": "verified",
+				"iconColour": "#b517e5"
+			},
+			"*Component:": {
+				"icon": "container",
+				"iconColour": "#1995de"
+			},
+			"*Art:": {
+				"icon": "paintbrush",
+				"iconColour": "#dbde19"
+			},
+			"*Alias:": {
+				"icon": "list-unordered"
+			},
+			"BUG": {
+				"icon": "bug"
+			}
+		},
+		"todo-tree.general.tagGroups": {
+
+		},
+		"todo-tree.tree.tooltipFormat": "${after}",
+		"todo-tree.tree.showCurrentScanMode": false
+	},
+	"mod_manager": {
+		"name": "%(modid)s",
+		"desc": ""
+	}
+}

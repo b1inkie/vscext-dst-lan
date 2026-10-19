@@ -1,0 +1,58 @@
+---@meta
+
+---@class data_recipe # 配方表
+---@field recipe_name string # 配方ID <br>---------------<br> - 辉煌铁匠铺栏 <br>tech = TECH.LUNARFORGING_TWO,<br>config = {<br>    station_tag = "lunar_forge",<br>    nounlock = true,<br>},<br>---------------<br> - 远古栏<br>tech = TECH.ANCIENT_THREE,<br>config = {<br>    station_tag = "altar",<br>    nounlock = true,<br>},<br>filters = {'CRAFTING_STATION'},<br>---------------<br> - 月岛科技栏 <br>tech = TECH.CELESTIAL_THREE,<br>config = {<br>    station_tag = "moon_altar",<br>    nounlock = true,<br>},<br>---------------<br> - 暗影术基座栏<br>tech = TECH.SHADOWFORGING_TWO,<br>config = {<br>    station_tag = "shadow_forge",<br>    nounlock = true,<br>},<br>
+---@field ingredients table # 材料表，格式为{Ingredient(参数1，参数2，参数3，参数4，参数5)}，详见下方说明
+---@field tech any # 解锁所需的科技能级，必须使用常量表TECH的值，比如TECH.NONE
+---@field isOriginalItem boolean|nil # 是否官方物品（官方物品严禁写atlas和image路径，因为会自动获取）
+---@field isAlwaysShown boolean|nil # 总是显示（即使游戏选项没有开启显示所有配方）
+---@field isHidden boolean|nil # 隐藏配方（不添加此配方，通常用于mod设置）
+---@field config recipe.config # 额外配置表，详见下方说明
+---@field filters recipe_filter[] # 过滤器分类，决定配方在制作菜单中的归属
+
+---@class recipe.config # 配方额外配置表（决定配方的特殊行为和显示方式）
+---@field placer string|nil # 放置物prefab名（如'wall_stone_placer'，为空则不显示放置物）
+---@field min_spacing number|nil # 放置物最小间距（为空则无间距）
+---@field nounlock boolean|nil # 是否需要解锁（true则无需解锁即可看到和制作）
+---@field numtogive number|nil # 制作时产出的数量（默认为1）
+---@field product string|nil # 产品prefab名（与配方名不同则实际产出为product）
+---@field builder_tag string|nil # 只有拥有该标签的角色才能看到该配方
+---@field builder_skill string|nil # 只有拥有该技能树技能名称的角色才能看到该配方
+---@field no_builder_tag string|table|nil # 拥有这些标签的角色无法看到该配方
+---@field no_builder_skill string|table|nil # 拥有这些技能的角色无法看到该配方
+---@field atlas string|nil # 产品的图集路径（atlas），建议自定义物品都填写
+---@field image string|(fun():string)|nil # 指定制作菜单显示的图标文件名（需与atlas配对，.tex后缀）
+---@field nameoverride string|nil # 覆盖制作菜单中显示的配方名称
+---@field description string|nil # 覆盖制作菜单中显示的描述 (需要写在STRINGS.RECIPE_DESC.XXX中,这里填xxx即可)
+---@field actionstr string|nil # 自定义制作按钮显示的动作文字
+---@field hint_msg string|nil # 配合force_hint使用，提示玩家解锁配方所需条件
+---@field force_hint boolean|nil # 是否强制显示本该被隐藏的锁定配方（如沃尔特专属配方提示）
+---@field testfn (fun(pt:any,rot:number):boolean)|nil # 自定义建造位置测试函数（返回bool，参数为坐标和旋转角度）
+---@field canbuild (fun(recipe:any,builder:any,pt:any,rotation:any,station:any):boolean,string)|nil # 自定义制作条件检查函数（返回bool和错误信息）
+---@field sg_state string|nil # 覆盖制作时使用的状态图状态（如buildingstate）
+---@field override_numtogive_fn (fun():number)|nil # 动态计算制作数量的函数（返回数字，覆盖numtogive）
+---@field build_mode number|nil # 建造模式（0=无，1=陆地，2=水上）
+---@field build_distance number|nil # 建造距离（人物与目标的最大距离）
+---@field no_deconstruction boolean|(fun(inst:any):boolean)|nil # 禁止拆解（true则完全禁止，函数可部分禁止）
+---@field decon_ignores_finiteuses boolean|(fun(inst:any):boolean)|nil # 分解时是否忽略耐久度（true则不考虑，函数可部分考虑）
+---@field manufactured boolean|nil # 是否由制作站处理物品创建（true则由制作台处理，false则由玩家背包生成）
+---@field station_tag string|nil # 需要特定标签的制作站才能制作
+---@field limitedamount number|nil # 限量制作数量（最多只能做几个）
+---@field require_special_event string|nil # 需要特定特殊事件才能制作（如winter_feast）
+---@field dropitem boolean|nil # 制作完成后掉落在地而不是背包
+---@field fxover table|nil # 制作菜单图标特效覆盖层（如暗影帽子的动画特效）
+---@field filter string|table|nil # 菜单过滤器分类（一般在AddRecipe2最后参数填写）
+---@field forward_ingredients table|nil # 技能树锁定时的替代配方（如沃尔特绳子）
+---@field source_recipename string|nil # 原始制作配方名（如薇诺娜扫描器用）
+---@field allowautopick boolean|nil # 允许自动拾取（如植物人自动收集）
+---@field name_cn string|nil # 物品的中文名称 # 只有在prefabname不为空时才会设置对应的中文名称
+---@field describe string|nil # 物品的人物检查描述 # 默认是通用检查语句，如果需要针对特殊角色特殊检查，需要额外写
+---@field desc string|nil # 物品制作栏中的描述 , 建议用 `description`
+---@field prefabname string|nil # 产品的prefab名 # 为空时则要填写config中的product
+
+---@class data_destruction_recipes # 分解配方表
+---@field name PrefabID # 物品prefab名
+---@field ingredients table # 分解返还的材料表
+
+
+---感谢星璃帮忙对config表的补全

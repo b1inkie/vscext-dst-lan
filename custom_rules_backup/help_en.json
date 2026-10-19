@@ -1,0 +1,14 @@
+{
+    "triggers": [
+        {
+            "regex": "help",
+            "items": [
+                {
+                    "label": "help",
+                    "documentation": "### API Completion v\n- To avoid logging into GitHub, I will post the completion prompts and update information here.\n\n|Trigger|-|Complete|\n|-|-|-|\n|p+prefab ID|-|Prefab ID completion, you can search for translation names|\n|tag+tagname|-|Tag completion, welcome to contribute comments, the community depends on everyone|\n|g+methodname|-|Query for uncommon global methods (common ones can be typed directly, uncommon ones will be put into g+)|\n|com+componentname|-|Query for uncommon components|\n|normal trigger method+i|-|Inspire Mode: Provides some code blocks|\n|contri+components|-|Become a contributor!(comment template)|\n|LAN+param|-|Method parameter comment---$param: (param) <type> [desc] {others}|\n|LAN+return|-|Method return comment---$return: <type> [desc]|\n|LANcomponent|-|Insert empty component code block|\n|LANstring|-|Insert Prefab Translation Block|\n|upper/lower|-|select string to upper/lower|\n### Theme\n- DST LAN ICON\n\n\tIcon designed for DST MOD folders\n### Others\n- User custom comment\n\n\t-- @user: comment\n### Command(ctrl + shift + P)\n- 👬Toggle Language\n- 💦Delete Comments\n- 🔗Gen ModFrame\n- 📦Compiler Anim\n- 🎨Make Prefab Anim and Img\n",
+                    "author": "lan"
+                }
+            ]
+        }
+    ]
+}

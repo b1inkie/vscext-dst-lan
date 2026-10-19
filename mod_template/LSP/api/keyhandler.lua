@@ -1,0 +1,133 @@
+---@meta
+
+---@alias key_map string|integer
+---| 'KEY_TAB' # value is: 9
+---| 'KEY_KP_0' # value is: 256
+---| 'KEY_KP_1' # value is: 257
+---| 'KEY_KP_2' # value is: 258
+---| 'KEY_KP_3' # value is: 259
+---| 'KEY_KP_4' # value is: 260
+---| 'KEY_KP_5' # value is: 261
+---| 'KEY_KP_6' # value is: 262
+---| 'KEY_KP_7' # value is: 263
+---| 'KEY_KP_8' # value is: 264
+---| 'KEY_KP_9' # value is: 265
+---| 'KEY_KP_PERIOD' # value is: 266
+---| 'KEY_KP_DIVIDE' # value is: 267
+---| 'KEY_KP_MULTIPLY' # value is: 268
+---| 'KEY_KP_MINUS' # value is: 269
+---| 'KEY_KP_PLUS' # value is: 270
+---| 'KEY_KP_ENTER' # value is: 271
+---| 'KEY_KP_EQUALS' # value is: 272
+---| 'KEY_MINUS' # value is: 45
+---| 'KEY_EQUALS' # value is: 61
+---| 'KEY_SPACE' # value is: 32
+---| 'KEY_ENTER' # value is: 13
+---| 'KEY_ESCAPE' # value is: 27
+---| 'KEY_HOME' # value is: 278
+---| 'KEY_INSERT' # value is: 277
+---| 'KEY_DELETE' # value is: 127
+---| 'KEY_END' # value is: 279
+---| 'KEY_PAUSE' # value is: 19
+---| 'KEY_PRINT' # value is: 316
+---| 'KEY_CAPSLOCK' # value is: 301
+---| 'KEY_SCROLLOCK' # value is: 302
+---| 'KEY_RSHIFT' # value is: 303 -- use KEY_SHIFT instead
+---| 'KEY_LSHIFT' # value is: 304 -- use KEY_SHIFT instead
+---| 'KEY_RCTRL' # value is: 305 -- use KEY_CTRL instead
+---| 'KEY_LCTRL' # value is: 306 -- use KEY_CTRL instead
+---| 'KEY_RALT' # value is: 307 -- use KEY_ALT instead
+---| 'KEY_LALT' # value is: 308 -- use KEY_ALT instead
+---| 'KEY_LSUPER' # value is: 311
+---| 'KEY_RSUPER' # value is: 312
+---| 'KEY_ALT' # value is: 400
+---| 'KEY_CTRL' # value is: 401
+---| 'KEY_SHIFT' # value is: 402
+---| 'KEY_BACKSPACE' # value is: 8
+---| 'KEY_PERIOD' # value is: 46
+---| 'KEY_SLASH' # value is: 47
+---| 'KEY_SEMICOLON' # value is: 59
+---| 'KEY_LEFTBRACKET' # value is: 91
+---| 'KEY_BACKSLASH' # value is: 92
+---| 'KEY_RIGHTBRACKET= 93' # value is: 96
+---| 'KEY_A' # value is: 97
+---| 'KEY_B' # value is: 98
+---| 'KEY_C' # value is: 99
+---| 'KEY_D' # value is: 100
+---| 'KEY_E' # value is: 101
+---| 'KEY_F' # value is: 102
+---| 'KEY_G' # value is: 103
+---| 'KEY_H' # value is: 104
+---| 'KEY_I' # value is: 105
+---| 'KEY_J' # value is: 106
+---| 'KEY_K' # value is: 107
+---| 'KEY_L' # value is: 108
+---| 'KEY_M' # value is: 109
+---| 'KEY_N' # value is: 110
+---| 'KEY_O' # value is: 111
+---| 'KEY_P' # value is: 112
+---| 'KEY_Q' # value is: 113
+---| 'KEY_R' # value is: 114
+---| 'KEY_S' # value is: 115
+---| 'KEY_T' # value is: 116
+---| 'KEY_U' # value is: 117
+---| 'KEY_V' # value is: 118
+---| 'KEY_W' # value is: 119
+---| 'KEY_X' # value is: 120
+---| 'KEY_Y' # value is: 121
+---| 'KEY_Z' # value is: 122
+---| 'KEY_F1' # value is: 282
+---| 'KEY_F2' # value is: 283
+---| 'KEY_F3' # value is: 284
+---| 'KEY_F4' # value is: 285
+---| 'KEY_F5' # value is: 286
+---| 'KEY_F6' # value is: 287
+---| 'KEY_F7' # value is: 288
+---| 'KEY_F8' # value is: 289
+---| 'KEY_F9' # value is: 290
+---| 'KEY_F10' # value is: 291
+---| 'KEY_F11' # value is: 292
+---| 'KEY_F12' # value is: 293
+---| 'KEY_UP' # value is: 273
+---| 'KEY_DOWN' # value is: 274
+---| 'KEY_RIGHT' # value is: 275
+---| 'KEY_LEFT' # value is: 276
+---| 'KEY_PAGEUP' # value is: 280
+---| 'KEY_PAGEDOWN' # value is: 281
+---| 'KEY_0' # value is: 48
+---| 'KEY_1' # value is: 49
+---| 'KEY_2' # value is: 50
+---| 'KEY_3' # value is: 51
+---| 'KEY_4' # value is: 52
+---| 'KEY_5' # value is: 53
+---| 'KEY_6' # value is: 54
+---| 'KEY_7' # value is: 55
+---| 'KEY_8' # value is: 56
+---| 'KEY_9' # value is: 57
+
+---@class data_keyhandler # 按键表 
+---@field namespace string # 命名空间(一般使用modid或者modid加分类的组合名)
+---@field skillid string # 技能id
+---@field type 'down'|'up' # 是弹起还是按下
+---@field avatar string[]|nil # 哪些角色prefab可以使用该技能 不填则所有人可用
+---@field key key_map # 按键
+---@field skill_template_type string # 技能模板类型
+---| 'none' # 没有模板
+---| 'active_with_builtinCD' # 激活型技能且带内置cd
+---| 'normal_with_CD' # 常规型技能,有cd,释放一次,开始计算cd
+---@field client_rpc_data nil|fun(player: ent):... # 客户端执行的内容,一定要有返回值,返回值将参数传给服务器(不填则不传数据)
+---@field client_fn_before fun(player: ent)|nil # 发RPC前的客户端执行内容
+---@field fn fun(player: ent,...)|nil # 触发的函数,不填则不发RPC <br> 判断技能是否正在使用: `player`.`using_`+`namespace`+`_`+`skillid` <br> 布尔值 true: 正在使用,false|nil: 未使用
+---@field client_fn_after fun(player: ent)|nil # 发RPC后的客户端执行内容
+---@field skill_template_active_with_builtinCD skill_template_active_with_builtinCD|nil # 技能模板额外数据表: <br> 激活型技能且带内置cd <br> skill_template_type 填了这个类型,则要有这个表
+---@field skill_template_normal_with_CD skill_template_normal_with_CD|nil # 技能模板额外数据表: <br> 常规型技能,有cd,释放一次,开始计算cd <br> skill_template_type 填了这个类型,则要有这个表
+
+---@class skill_template_active_with_builtinCD # 激活型技能且带内置cd
+---@field cd number|nil # 激活型技能的内置cd,每次开关后,会进入这个cd,转好才能继续释放 <br> 不填则没有内置cd
+---@field fn_when_skill_deactivated fun(player: ent)|nil # 技能被关闭时的回调函数,可不填
+---@field fn_when_cooldown fun(player: ent)|nil # 内置cd转好时的回调函数,可不填,无cd时填了也不会生效
+
+---@class skill_template_normal_with_CD # 常规型技能,有cd,释放一次,开始计算cd
+---@field cd number|nil # 技能cd,每次释放后,会进入这个cd,转好才能继续释放 <br> 不填则没有cd
+---@field fn_when_cooldown fun(player: ent)|nil # cd转好时的回调函数,可不填,无cd时填了也不会生效
+

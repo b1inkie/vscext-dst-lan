@@ -1,0 +1,28 @@
+---@meta
+
+---@class data_trade_item
+---@field prefab PrefabID
+---@field max integer|nil # 最大值,不填则可以无限交易
+---@field str string|nil # 交易显示的动作提示, 不填则用 `给予`
+---@field state string|nil # 用什么sg触发,不填则用 `give`
+---| '"give"' # 给予
+---| '"doshortaction"' # 快速搓东西
+---| '"domediumaction"' # 正常搓东西
+---| '"dolongaction"' # 慢慢搓东西
+---| '"castspell"' # 慢速释放法术
+---| '"quickcastspell"' # 快速释放法术
+---@field testfn (fun(item:ent,trader:ent,doer:ent):boolean)|nil # 测试物品是否可以交易, 注意这是一个 `双端` 的测试函数
+---@field testfn_server (fun(item:ent,trader:ent,doer:ent):boolean)|nil # 服务器端测试物品是否可以交易
+---@field fn fun(item:ent,trader:ent,doer:ent,after_num:integer)|nil # 给予物品时执行
+---@field fn_load fun(trader:ent,total_num:integer)|nil # 组件加载时,执行
+
+---@class (exact) data_trade_item_fixed # 不要管我
+---@field prefab PrefabID # 不要管我
+---@field max integer|nil # 不要管我
+---@field str string|nil # 不要管我
+---@field state string|nil # 不要管我
+---@field testfn (fun(item:ent,trader:ent,doer:ent):boolean)|nil # 不要管我
+---@field testfn_server (fun(item:ent,trader:ent,doer:ent):boolean)|nil # 不要管我
+---@field fn fun(item:ent,trader:ent,doer:ent,after_num:integer)|nil # 不要管我
+---@field fn_load fun(trader:ent,total_num:integer)|nil # 不要管我
+---@field index integer # 不要管我
