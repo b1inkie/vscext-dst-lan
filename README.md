@@ -1,8 +1,8 @@
 # Don't Starve Together Mod Dev Tools & API support library of lua-language-server
 
-![version](https://vsmarketplacebadges.dev/version/lan.dst-lan.svg)
-![installs](https://vsmarketplacebadges.dev/installs/lan.dst-lan.svg)
-![downloads](https://vsmarketplacebadges.dev/downloads/lan.dst-lan.svg)
+![version](https://vsmarketplacebadges.dev/version/lan.dst-lan.png)
+![installs](https://vsmarketplacebadges.dev/installs/lan.dst-lan.png)
+![downloads](https://vsmarketplacebadges.dev/downloads/lan.dst-lan.png)
 
 ## 饥荒mod开发工具 / Don't Starve Together Mod Dev Tools
 
