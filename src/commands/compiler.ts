@@ -1,6 +1,6 @@
 /**
  * 命令 dst-lan.compiler —— 打包当前 mod 的动画与贴图(内置引擎, 零外部依赖)。
- * 执行时三选一: ① 正常打包动画和图片 ② 多图片打包成图集 ③ 解包 tex/xml 为 png。
+ * 执行时二选一: ① 正常打包动画和图片 ② 多图片打包成图集(解包功能在 dst-lan.extra 菜单)。
  *
  * 打包范围:
  *  - images / bigportraits / levels / fx(递归子目录, 已有同名 .tex 的 png 跳过)
@@ -20,60 +20,26 @@ import { packScmlToZip } from '../lib/anim2/pack';
 import { packPngToTex } from '../lib/anim2/scatter';
 import { logLine, logWarn, showOutput } from '../lib/output';
 import { packFolderAsAtlas } from './extrafn';
-import { unpackAtlasAuto } from '../lib/anim2/unpack';
+import { genPathIn } from '../constants';
 
 export function registerCompiler(context: vscode.ExtensionContext): vscode.Disposable {
 	return vscode.commands.registerCommand('dst-lan.compiler', runCompiler);
 }
 
 async function runCompiler(): Promise<void> {
-	const options = [
-		vscode.l10n.t('src.extension.compiler.switch_normal'),
-		vscode.l10n.t('src.extension.compiler.switch_atlas'),
-		vscode.l10n.t('src.extension.compiler.switch_unpack'),
+	const dstIcon = vscode.Uri.file(genPathIn('icons', 'dst-logo-32px.png'));
+	const options: vscode.QuickPickItem[] = [
+		{ label: '1. ', description: vscode.l10n.t('src.extension.compiler.switch_normal'), iconPath: { light: dstIcon, dark: dstIcon } },
+		{ label: '2. ', description: vscode.l10n.t('src.extension.compiler.switch_atlas'), iconPath: { light: dstIcon, dark: dstIcon } },
 	];
 	const selectedOption = await vscode.window.showQuickPick(options);
 	if (!selectedOption) {
 		return;
 	}
-	if (selectedOption === options[0]) {
+	if (selectedOption.label === '1. ') {
 		await doCompileBuiltin();
-	} else if (selectedOption === options[1]) {
-		await packFolderAsAtlas();
 	} else {
-		await unpackTexFiles();
-	}
-}
-
-/** 解包: 选 .tex(整图还原 png) 或图集 .xml(每元素一个 png) */
-async function unpackTexFiles(): Promise<void> {
-	const picked = await vscode.window.showOpenDialog({
-		canSelectMany: true,
-		canSelectFolders: false,
-		filters: { 'Atlas key (xml)': ['xml'] },
-		openLabel: vscode.l10n.t('src.extension.compiler.unpack-pick'),
-	});
-	if (!picked || picked.length === 0) {
-		return;
-	}
-	const pngs: string[] = [];
-	const failures: string[] = [];
-	for (const uri of picked) {
-		const p = uri.fsPath;
-		try {
-		// 解包部件: 多元素图集 -> 同名文件夹; 单元素(散图) -> png 直接在 xml 旁
-		const r = await unpackAtlasAuto(p);
-		pngs.push(...r.pngs);
-		} catch (err) {
-			failures.push(`${path.basename(p)}: ${err instanceof Error ? err.message : err}`);
-		}
-	}
-	if (pngs.length > 0) {
-		vscode.window.showInformationMessage(vscode.l10n.t('src.extension.compiler.unpack-done')
-			.replace('{n}', String(pngs.length))
-			+ (failures.length > 0 ? vscode.l10n.t('src.extension.compiler.partial').replace('{n}', String(failures.length)) : ''));
-	} else if (failures.length > 0) {
-		vscode.window.showErrorMessage(failures.join('; '));
+		await packFolderAsAtlas();
 	}
 }
 

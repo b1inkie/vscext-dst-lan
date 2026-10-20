@@ -48,6 +48,7 @@
     "src.extension.extra.op.select_scml_file": "请选择一个scml文件",
     "src.extension.extra.op.expand-crop-canvas": "一键缩放画布",
     "src.extension.extra.op.color-picker": "颜色选择器",
+    "src.extension.extra.op.unpack": "解包 tex/xml 为 png",
     "src.extension.extra.op.fdp-gener": "快速制作fdp文件",
     "src.extension.extra.op.fdp-gener-title": "fdp是fmod生成fsb的参数文件",
     "src.extension.extra.op.fdp-gener-go": "我已制作好音频文件,并放入了对应的目录,请生成fdp文件",
@@ -70,7 +71,6 @@
     "src.extension.extra.op.atlas-pick-outdir": "选择输出文件夹(图集 .tex/.xml 将生成到这里)",
     "src.extension.compiler.switch_normal": "正常打包动画和图片",
     "src.extension.compiler.switch_atlas": "多图片打包成图集",
-    "src.extension.compiler.switch_unpack": "解包 tex/xml 为 png",
     "src.extension.compiler.unpack-pick": "选择图集 .xml 文件(解出元素 png)",
     "src.extension.compiler.unpack-done": "已解包 {n} 个 png"
 }

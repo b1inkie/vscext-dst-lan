@@ -1,8 +1,8 @@
 # Don't Starve Together Mod Dev Tools & API support library of lua-language-server
 
-![version](https://img.shields.io/visual-studio-marketplace/v/lan.dst-lan)
-![installs](https://img.shields.io/visual-studio-marketplace/i/lan.dst-lan)
-![downloads](https://img.shields.io/visual-studio-marketplace/d/lan.dst-lan)
+![version](https://vsmarketplacebadges.dev/version/lan.dst-lan.svg)
+![installs](https://vsmarketplacebadges.dev/installs/lan.dst-lan.svg)
+![downloads](https://vsmarketplacebadges.dev/downloads/lan.dst-lan.svg)
 
 ## 饥荒mod开发工具 / Don't Starve Together Mod Dev Tools
 
@@ -17,11 +17,11 @@ All-in-one DST modding toolkit: mod scaffolding, character injection, and animat
 |---|---|
 | `dst-lan: 生成mod框架` (gen-mod) | 输入 modid, 一键生成完整 mod 骨架 / Scaffold a full mod from a modid |
 | `dst-lan: 人物模板注入` (inject-avatar) | 向已有 mod 注入新人物全套资源 / Inject a new character into an existing mod |
-| `dst-lan: 打包动画` (compiler) | 动画/贴图打包、图集打包、解包 三合一 / Compile, atlas-pack, or unpack |
+| `dst-lan: 打包动画` (compiler) | 动画/贴图打包、图集打包 二合一 / Compile & atlas-pack |
 | `dst-lan: 制作预制物图` (makeimg) | 提取三张模板图供绘制, 完成后自动注入 inventoryimages / swap / ground 与 scml / Extract 3 template images to draw on, then inject inventoryimages, swap, ground assets and scml |
 | `dst-lan: 删除注释` (delete-comments) | 删除当前 Lua 文件的注释与空行(字符串安全) / Strip Lua comments & blank lines (string-safe) |
 | `dst-lan: 切换语言` (toggle-language) | 切换中英文 snippets 与界面 / Toggle zh-cn / English snippets & UI |
-| `dst-lan: extra` | 工具箱: 打包 zip、画布扩大/裁剪、取色器 / Toolbox: pack zip, canvas expand/crop, color picker |
+| `dst-lan: extra` | 工具箱: 打包 zip、画布扩大/裁剪、取色器、解包 / Toolbox: pack zip, canvas expand/crop, color picker, unpack |
 
 ### 💊糖 / Sugar
 
@@ -66,4 +66,4 @@ In the VSCode Extension Marketplace, search for the keyword lua and select the t
 - 如果您对本插件有任何建议,或者有想要的辅助mod开发的功能,可以向我提交issue或者加qq群@我. 
 dst-lan Github: xxx
 LSP Gitee: https://gitee.com/b1inkie/lsp-dst
-qq群: `623398781`
+- qq群: `623398781`

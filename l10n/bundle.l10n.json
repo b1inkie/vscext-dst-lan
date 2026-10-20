@@ -48,6 +48,7 @@
     "src.extension.extra.op.select_scml_file": "Select a .scml file",
     "src.extension.extra.op.expand-crop-canvas": "One-click canvas zoom",
     "src.extension.extra.op.color-picker": "Color Picker",
+    "src.extension.extra.op.unpack": "Unpack tex/xml to png",
     "src.extension.extra.op.fdp-gener": "Quickly create fdp file",
     "src.extension.extra.op.fdp-gener-title": "fdp is a parameter file for fmod to generate fsb",
     "src.extension.extra.op.fdp-gener-go": "I have prepared the audio files and put them in the corresponding directory, please generate the fdp file",
@@ -70,7 +71,6 @@
     "src.extension.extra.op.atlas-pick-outdir": "Select output folder (atlas .tex/.xml will be created here)",
     "src.extension.compiler.switch_normal": "Compile animations & images (normal)",
     "src.extension.compiler.switch_atlas": "Pack image folder as one atlas",
-    "src.extension.compiler.switch_unpack": "Unpack tex/xml to png",
     "src.extension.compiler.unpack-pick": "Select atlas .xml file(s) to extract element pngs",
     "src.extension.compiler.unpack-done": "Unpacked {n} png file(s)"
 }

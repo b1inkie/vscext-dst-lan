@@ -69,6 +69,8 @@ async function runGenMod(): Promise<void> {
 	await rewriteContent(sub('modinfo.lua'), { modid });
 	await rewriteContent(sub('scripts', 'core_modid', 'api', '_register.lua'), { modid });
 	await rewriteContent(sub('scripts', 'api_skins', 'modid_skins.lua'), { modid, modid_upper: modidUpper });
+	// modmain 以 <modid>_skins 导入, 文件名必须同步改名
+	await rename(sub('scripts', 'api_skins', 'modid_skins.lua'), `${modid}_skins.lua`);
 	await rewriteContent(sub('scripts', 'core_modid', 'data', 'unlock_skins.lua'), { modid, modid_upper: modidUpper });
 	await rewriteContent(sub('scripts', 'core_modid', 'skins', 'myspear.lua'), { modid, modid_upper: modidUpper });
 	await rewriteContent(sub('modworldgenmain.lua'), { modid, modid_upper: modidUpper });

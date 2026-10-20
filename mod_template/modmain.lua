@@ -55,7 +55,7 @@ modimport('scripts/core_'..modid..'/languages/'..TUNING[string.upper('CONFIG_'..
 modimport('scripts/api_skins/'..modid..'_skins') -- 皮肤api
 
 -- 导入人物
--- modimport('scripts/data_avatar/data_avatar_xxx.lua')
+-- modimport('scripts/data_avatar/data_avatar_%(avatar_id_to_replace)s.lua')
 
 -- 导入调用器
 %(callers)s

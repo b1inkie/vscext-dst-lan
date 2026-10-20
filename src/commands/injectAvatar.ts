@@ -8,7 +8,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { genPathIn } from '../constants';
-import { copyFolder, pathExists, renameEntry } from '../lib/fsx';
+import { copyFolder, pathExists, renameEntry, replaceInFile } from '../lib/fsx';
 import { rewriteContent } from '../lib/placeholder';
 import { showOutput } from '../lib/output';
 import { getActiveEditorPath } from '../lib/modroot';
@@ -107,6 +107,13 @@ async function runInjectAvatar(): Promise<void> {
 	});
 	await rename(sub('scripts', 'data_avatar', 'data_avatar_avatarid.lua'), `data_avatar_${avatarID}.lua`);
 	await rename(sub('scripts', 'prefabs', 'avatar_avatarid.lua'), `avatar_${avatarID}.lua`);
+
+	// modmain: 替换「导入人物」行中的 %(avatar_id_to_replace)s 占位符, 并去掉行首注释直接启用导入
+	// (modmain 缺失时 rewriteContent/replaceInFile 自行警告跳过, 不中断注入)
+	await rewriteContent(sub('modmain.lua'), { avatar_id_to_replace: avatarID });
+	const avatarImport = `modimport('scripts/data_avatar/data_avatar_${avatarID}.lua')`;
+	const escaped = avatarImport.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	await replaceInFile(sub('modmain.lua'), new RegExp(`^\\s*--\\s*${escaped}`, 'm'), avatarImport);
 
 	if (renameFailures.length > 0) {
 		vscode.window.showWarningMessage(

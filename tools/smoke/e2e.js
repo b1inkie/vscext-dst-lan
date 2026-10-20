@@ -80,6 +80,8 @@ async function main() {
 	assert.ok(fs.existsSync(path.join(mod, 'scripts', 'core_testmod')), 'core folder renamed');
 	assert.ok(!fs.existsSync(path.join(mod, 'scripts', 'core_modid')), 'old core folder gone');
 	assert.ok(fs.existsSync(path.join(mod, `dst_mod-testmod.code-workspace`)), 'wp json renamed');
+	assert.ok(fs.existsSync(path.join(mod, 'scripts', 'api_skins', 'testmod_skins.lua')), 'api_skins renamed');
+	assert.ok(!fs.existsSync(path.join(mod, 'scripts', 'api_skins', 'modid_skins.lua')), 'old api_skins name gone');
 	assert.ok(!fs.existsSync(path.join(mod, 'lan_modframe.md')) && !fs.existsSync(path.join(mod, '.modframe')), 'modframe files removed from template');
 	s = fs.readFileSync(path.join(mod, 'modmain.lua'), 'utf8');
 	assert.ok(s.includes("local modid = 'testmod'"), 'modmain modid replaced');
@@ -116,6 +118,9 @@ async function main() {
 	assert.ok(fs.existsSync(path.join(mod, 'exported', 'wilson2', 'wilson2.scml')), 'scml renamed');
 	assert.ok(fs.existsSync(path.join(mod, 'exported', 'ghost_wilson2_build')), 'ghost build renamed');
 	assert.ok(fs.existsSync(path.join(mod, 'scripts', 'prefabs', 'avatar_wilson2.lua')), 'avatar prefab renamed');
+	assert.ok(!av(['modmain.lua']).includes('%(avatar_id_to_replace)s'), 'modmain avatar placeholder replaced');
+	assert.ok(av(['modmain.lua']).includes("modimport('scripts/data_avatar/data_avatar_wilson2.lua')"), 'modmain avatar import updated');
+	assert.ok(!av(['modmain.lua']).includes("-- modimport('scripts/data_avatar/wilson2.lua')"), 'modmain avatar import uncommented');
 	assert.ok(!av(['scripts', 'prefabs', 'avatar_wilson2.lua']).includes('%(avatarid)s'), 'prefab placeholders replaced');
 	assert.ok(!av(['scripts', 'prefabs', 'avatar_wilson2.lua']).includes('%(modid)s'), 'prefab modid replaced');
 	assert.ok(!av(['exported', 'wilson2', 'wilson2.scml']).includes('%(avatarid)s'), 'scml placeholders replaced');

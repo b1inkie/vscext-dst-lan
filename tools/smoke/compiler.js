@@ -77,7 +77,7 @@ async function main() {
   // 选择内置编译: compiler 命令进入 QuickPick? 查看编译器入口逻辑
   // (dst-lan.compiler 直接 doCompile? 若有模式选择需先选内置)
   quickPickQueue.length = 0;
-  quickPickQueue.push('src.extension.compiler.switch_normal');
+  quickPickQueue.push({ label: '1. ' }); // 选「正常打包动画和图片」(菜单为 QuickPickItem, 按 label 分发)
   inputQueue.length = 0;
   await registered.get('dst-lan.compiler')();
   console.log('--- toasts ---');

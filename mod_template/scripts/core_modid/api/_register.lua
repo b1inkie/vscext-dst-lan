@@ -29,7 +29,3 @@ API.KEYHANDLER = require_to_env('core_'..modid..'/api/keyhandler')
 API.BADGE = require_to_env('core_'..modid..'/api/badge')
 ---@type api_changeactionsg
 API.CHANGEACTIONSG = require_to_env('core_'..modid..'/api/changeactionsg')
----@type api_attackperiod
-API.ATKPERIOD = require_to_env('core_'..modid..'/api/attackperiod')
----@type api_onlyusedby
-API.ONLYUSEDBY = require_to_env('core_'..modid..'/api/onlyusedby')

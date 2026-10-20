@@ -4,7 +4,8 @@
  *  1. 打包当前 mod 为 zip(创意工坊上传所需的精简包 / 全量包)
  *  2. 画布一键扩/裁(scml 关联 png 与 XML pivot 同步修正)
  *  3. 取色器(webview)
- *  4. fdp 声音工程生成 —— 2.0 重构中, 暂为 WIP 提示
+ *  4. 解包: 选图集 .xml(多元素出文件夹, 单元素出 png)
+ *  5. fdp 声音工程生成 —— 2.0 重构中, 暂为 WIP 提示
  */
 import * as vscode from 'vscode';
 import * as fs from 'fs';
@@ -14,6 +15,7 @@ import { pickAndPackDirectory } from './packZip';
 import { packFolderToAtlas } from '../lib/anim2/atlasPack';
 import { opExpandAll, opCropAll, selectScmlFile, DEFAULT_EXPAND_SCALE, DEFAULT_MAX_SIZE } from '../lib/canvas';
 import { getActiveEditorPath, findModInfoFile } from '../lib/modroot';
+import { unpackAtlasAuto } from '../lib/anim2/unpack';
 
 export function registerExtraFn(context: vscode.ExtensionContext): vscode.Disposable {
 	return vscode.commands.registerCommand('dst-lan.extrafn', runExtraFn);
@@ -41,7 +43,8 @@ async function runExtraFn(): Promise<void> {
 		{ label: '1. ', description: vscode.l10n.t('src.extension.extra.op.packzip'), iconPath: { light: dstIcon, dark: dstIcon } },
 		{ label: '2. ', description: vscode.l10n.t('src.extension.extra.op.expand-crop-canvas'), iconPath: { light: dstIcon, dark: dstIcon } },
 		{ label: '3. ', description: vscode.l10n.t('src.extension.extra.op.color-picker'), iconPath: { light: dstIcon, dark: dstIcon } },
-		{ label: '4. ', description: vscode.l10n.t('src.extension.extra.op.fdp-gener'), iconPath: { light: fmodIcon, dark: fmodIcon } },
+		{ label: '4. ', description: vscode.l10n.t('src.extension.extra.op.unpack'), iconPath: { light: dstIcon, dark: dstIcon } },
+		{ label: '5. ', description: vscode.l10n.t('src.extension.extra.op.fdp-gener'), iconPath: { light: fmodIcon, dark: fmodIcon } },
 	];
 
 	quickpick.onDidAccept(async () => {
@@ -60,10 +63,13 @@ async function runExtraFn(): Promise<void> {
 			case '3. ':
 				openColorPicker();
 				break;
-			case '4. ':
-				// fdp 生成器重构中
-				vscode.window.showInformationMessage(vscode.l10n.t('src.extension.extra.op.fdp-wip'));
-				break;
+		case '4. ':
+			await unpackTexFiles();
+			break;
+		case '5. ':
+			// fdp 生成器重构中
+			vscode.window.showInformationMessage(vscode.l10n.t('src.extension.extra.op.fdp-wip'));
+			break;
 			default:
 				break;
 		}
@@ -183,6 +189,37 @@ export async function packFolderAsAtlas(): Promise<void> {
 			+ `\n${result.texPath}`);
 	} catch (error) {
 		vscode.window.showErrorMessage(`atlas pack failed: ${error}`);
+	}
+}
+/** 解包: 选图集 .xml(整图还原 png) 或多元素图集(每元素一个 png) */
+async function unpackTexFiles(): Promise<void> {
+	const picked = await vscode.window.showOpenDialog({
+		canSelectMany: true,
+		canSelectFolders: false,
+		filters: { 'Atlas key (xml)': ['xml'] },
+		openLabel: vscode.l10n.t('src.extension.compiler.unpack-pick'),
+	});
+	if (!picked || picked.length === 0) {
+		return;
+	}
+	const pngs: string[] = [];
+	const failures: string[] = [];
+	for (const uri of picked) {
+		const p = uri.fsPath;
+		try {
+			// 解包部件: 多元素图集 -> 同名文件夹; 单元素(散图) -> png 直接在 xml 旁
+			const r = await unpackAtlasAuto(p);
+			pngs.push(...r.pngs);
+		} catch (err) {
+			failures.push(`${path.basename(p)}: ${err instanceof Error ? err.message : err}`);
+		}
+	}
+	if (pngs.length > 0) {
+		vscode.window.showInformationMessage(vscode.l10n.t('src.extension.compiler.unpack-done')
+			.replace('{n}', String(pngs.length))
+			+ (failures.length > 0 ? vscode.l10n.t('src.extension.compiler.partial').replace('{n}', String(failures.length)) : ''));
+	} else if (failures.length > 0) {
+		vscode.window.showErrorMessage(failures.join('; '));
 	}
 }
 /** 取色器 webview */
