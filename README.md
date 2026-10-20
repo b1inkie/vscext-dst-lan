@@ -64,6 +64,6 @@ In the VSCode Extension Marketplace, search for the keyword lua and select the t
 
 - 本插件提供的API补全不再进行更新,请使用 `lua-language-server` 的 `LLS智能识别支持库`。
 - 如果您对本插件有任何建议,或者有想要的辅助mod开发的功能,可以向我提交issue或者加qq群@我. 
-dst-lan Github: xxx
+dst-lan Github: https://github.com/b1inkie/vscext-dst-lan
 LSP Gitee: https://gitee.com/b1inkie/lsp-dst
 - qq群: `623398781`
